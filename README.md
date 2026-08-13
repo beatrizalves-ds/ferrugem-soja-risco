@@ -64,7 +64,7 @@ Usando estimativas de mercado (custo de aplicação de fungicida preventivo em t
 | Threshold ótimo (0.10) | R$ 20.880 |
 | Tratar todos os talhões | R$ 21.600 |
 | Threshold padrão (0.5) | R$ 87.620 |
-| Não tratar ninguém | R$ 203.000 |
+| Não tratar nenhum talhão | R$ 203.000 |
 
 O achado mais importante não é o número isolado, é a comparação entre eles. O threshold ótimo economiza 76% frente ao padrão de 0.5, mas fica muito próximo do custo de simplesmente tratar todos os talhões sem usar modelo nenhum. Isso acontece porque a perda por ferrugem não tratada é quase 20 vezes maior que o custo do fungicida: quando o custo de um tipo de erro é tão mais alto que o do outro, a decisão financeiramente ótima tende a ser tratar quase tudo, e o modelo só agrega valor real na fatia de talhões onde dá pra economizar o fungicida com segurança. Em um cenário com custos mais equilibrados entre tratamento e perda, o modelo teria impacto financeiro bem maior que o observado aqui.
 
