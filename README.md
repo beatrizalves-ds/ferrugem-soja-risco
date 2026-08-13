@@ -4,6 +4,10 @@ Projeto de portfólio que estima o risco de um talhão de soja desenvolver ferru
 
 Ferrugem asiática é uma das doenças mais custosas da soja no Brasil. O risco dela está ligado a condições climáticas bem conhecidas na agronomia: temperatura entre 15°C e 28°C combinada com muitas horas seguidas de alta umidade favorece o fungo.
 
+![Calendário de dias favoráveis à ferrugem](calendario_risco_climatico.png)
+
+O padrão sazonal real de Sorriso-MT: dias climaticamente favoráveis se concentram na estação chuvosa (outubro a abril), coincidindo com a janela de plantio e desenvolvimento da soja, e praticamente desaparecem na seca (maio a setembro).
+
 ## Dados
 
 Duas fontes, com critério claro sobre o que é real e o que é simulado.
@@ -46,6 +50,23 @@ AUC de 0.72 com só três variáveis é honesto: separa bem os dois grupos, mas 
 ## Ranking de talhões por risco
 
 A saída mais útil aqui não é a classificação binária, é a probabilidade de cada talhão, ordenada. Dos 15 talhões de maior risco na base de teste, 12 realmente desenvolveram ferrugem, e quase todos compartilham o mesmo perfil: cultivar de alta suscetibilidade sem fungicida preventivo. É a lista que orientaria uma equipe agronômica sobre onde priorizar aplicação primeiro. Ranking completo em `ranking_risco_ferrugem.csv`.
+
+## Custo-benefício do ponto de decisão
+
+O modelo entrega uma probabilidade, mas decidir a partir de qual probabilidade vale a pena tratar preventivamente não deveria usar o padrão estatístico de 50% sem questionar. Essa decisão depende do custo relativo de cada tipo de erro: tratar um talhão que não precisava, ou deixar de tratar um que precisava.
+
+Usando estimativas de mercado (custo de aplicação de fungicida preventivo em torno de R$180/ha, perda esperada por ferrugem não tratada em torno de R$3.500/ha), testei o custo total da base de teste em diferentes pontos de corte.
+
+![Custo por threshold](custo_beneficio_threshold.png)
+
+| Cenário | Custo total |
+|---|---|
+| Threshold ótimo (0.10) | R$ 20.880 |
+| Tratar todos os talhões | R$ 21.600 |
+| Threshold padrão (0.5) | R$ 87.620 |
+| Não tratar ninguém | R$ 203.000 |
+
+O achado mais importante não é o número isolado, é a comparação entre eles. O threshold ótimo economiza 76% frente ao padrão de 0.5, mas fica muito próximo do custo de simplesmente tratar todos os talhões sem usar modelo nenhum. Isso acontece porque a perda por ferrugem não tratada é quase 20 vezes maior que o custo do fungicida: quando o custo de um tipo de erro é tão mais alto que o do outro, a decisão financeiramente ótima tende a ser tratar quase tudo, e o modelo só agrega valor real na fatia de talhões onde dá pra economizar o fungicida com segurança. Em um cenário com custos mais equilibrados entre tratamento e perda, o modelo teria impacto financeiro bem maior que o observado aqui.
 
 ## Limitações
 
