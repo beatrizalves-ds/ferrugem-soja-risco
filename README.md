@@ -55,7 +55,7 @@ A saída mais útil aqui não é a classificação binária, é a probabilidade 
 
 O modelo entrega uma probabilidade, mas decidir a partir de qual probabilidade vale a pena tratar preventivamente não deveria usar o padrão estatístico de 50% sem questionar. Essa decisão depende do custo relativo de cada tipo de erro: tratar um talhão que não precisava, ou deixar de tratar um que precisava.
 
-Usando estimativas de mercado (custo de aplicação de fungicida preventivo em torno de R$180/ha, perda esperada por ferrugem não tratada em torno de R$3.500/ha), testei o custo total da base de teste em diferentes pontos de corte.
+Usando valores ilustrativos de custo (aplicação de fungicida preventivo em torno de R$180/ha, perda esperada por ferrugem não tratada em torno de R$3.500/ha), testei o custo total da base de teste em diferentes pontos de corte.
 
 ![Custo por threshold](custo_beneficio_threshold.png)
 
@@ -74,6 +74,7 @@ O achado mais importante não é o número isolado, é a comparação entre eles
 - Só uma divisão de treino/teste foi usada. O resultado pode mudar com outra divisão; o ideal seria validação cruzada.
 - O indicador de umidade alta é proxy pra folha molhada, não a medição direta que agronomia de precisão usa.
 - Uma estação meteorológica representa uma região inteira, mas o clima varia dentro do próprio município.
+- Os valores de custo de fungicida e perda por ferrugem são ilustrativos, escolhidos por plausibilidade e não retirados de uma fonte específica documentada. A conclusão sobre onde fica o threshold ótimo depende diretamente desses números; com valores reais de mercado, o resultado poderia mudar.
 
 ## Próximos passos
 
@@ -84,4 +85,4 @@ O achado mais importante não é o número isolado, é a comparação entre eles
 
 ## Ferramentas
 
-Python, pandas, scikit-learn, matplotlib, dados históricos oficiais do INMET, Google Colab
+Python, pandas, numpy, scikit-learn, matplotlib, calplot, dados históricos oficiais do INMET, Google Colab
